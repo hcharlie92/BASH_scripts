@@ -1,15 +1,11 @@
 !#bin/bash
-echo "What is your name?"
-read name
-
-if grep ^$name  /etc/passwd; then
-    echo "The user was found"
-else
-    sudo  useradd -m $name
-    echo "Creating new user"
-fi
-
- 
+userfile=/home/ubuntu/useradd/userlist
+username=$(cat /home/ubuntu/useradd/userlist | tr 'A-Z' 'a-z')
+for user in $username
+do
+       sudo useradd $user
+done
+echo "$(wc -l /home/ubuntu/useradd/userlist) users have been created"
 
 
 
